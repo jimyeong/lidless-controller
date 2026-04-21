@@ -1,0 +1,25 @@
+# Git
+.git
+.gitignore
+
+# Python junk
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+.pytest_cache/
+
+# Docker
+Dockerfile
+.dockerignore
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Large data files you DON'T want in the image 
+# (But keep your specific CSV if you're using it for now!)
+# *.csv  <-- Don't uncomment this yet if you need that 1.5MB file!
