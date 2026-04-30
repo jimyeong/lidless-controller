@@ -94,7 +94,6 @@ class RavenRabbitMQSubscriber:
             print(" [v] DB connection closed")
 
 
-
 if __name__ == "__main__":
     if not CLOUD_AMQP_URL:
         print(" [!] Missing environment variables: CLOUD_AMQP_URL")
