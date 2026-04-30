@@ -16,6 +16,12 @@ COPY requirements.txt .
 RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
 # 3. Rest of your config
+COPY . .
 COPY core/db/configs/postgresql.conf /etc/postgresql/postgresql.conf
 COPY core/db/configs/pg_hba.conf /etc/postgresql/pg_hba.conf
-COPY . .
+
+# 4. CRITICAL: Fix permissions so the 'postgres' user can read the configs
+RUN chown -R postgres:postgres /etc/postgresql/ /app/
+
+# 5. Switch to the unprivileged user for the DB cards
+USER postgres
