@@ -25,8 +25,6 @@ def process_reading(body, db_wrapper):
     except Exception as e:
         print(f" [!] Error processing message: {e}")
         raise # Re-raise to trigger the nack in the subscriber
-    
-        
 
 class RavenRabbitMQSubscriber:
     def __init__(self, amqp_url, queue):
@@ -40,18 +38,15 @@ class RavenRabbitMQSubscriber:
             exchange_type="direct",
             durable=True
         )
-
         channel.queue_declare(
             queue=DLQ_NAME,
             durable=True
         )
-
         channel.queue_bind(
             exchange=DLX_EXCHANGE_NAME,
             queue=DLQ_NAME,
             routing_key=ROUTING_KEY
         )
-
         channel.queue_declare(
             queue=QUEUE_NAME,
             durable=True,
@@ -66,15 +61,10 @@ class RavenRabbitMQSubscriber:
             self.db_conn = WriteDB(**WRITE_DB_CONFIG)
             self.db_conn.connect()
             print(" [v] DB connected")
-            
-            
-
             params = pika.URLParameters(self.amqp_url)
             self.connection = pika.BlockingConnection(params)
             channel = self.connection.channel()
-
             #setup queue
-            
             self._setup_topology(channel)
             channel.basic_qos(prefetch_count=1)
             channel.basic_consume(
