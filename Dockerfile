@@ -13,7 +13,7 @@ WORKDIR /app
 
 # Install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r --break-system-packages requirements.txt
+RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
 
 # Copy your configs and code
