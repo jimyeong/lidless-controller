@@ -1,8 +1,13 @@
-FROM python:3.11-slim
+FROM postgres:16
 
 WORKDIR /app
 # Install system dependencies for Posgres
-RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 
