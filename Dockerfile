@@ -1,27 +1,21 @@
 FROM postgres:16
 
-WORKDIR /app
-# Install system dependencies for Posgres
+# 1. Install specific python3 packages
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
+    python3-dev \
     libpq-dev \
     gcc \
     && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
-
-# Install Python dependencies
+# 2. Use 'pip3' and the break-system-packages override
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
-
-# Copy your configs and code
+# 3. Rest of your config
 COPY core/db/configs/postgresql.conf /etc/postgresql/postgresql.conf
 COPY core/db/configs/pg_hba.conf /etc/postgresql/pg_hba.conf
-
-
-# Copy the rest of the code
 COPY . .
-
-
