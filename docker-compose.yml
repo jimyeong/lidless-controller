@@ -1,0 +1,36 @@
+services:
+  pg-primary:
+    image: postgres:16
+    container_name: lidless-write-db
+    healthcheck: 
+      test: ["CMD-SHELL", "pg_isready -U postgres -d lidless"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports: 
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=lidless
+    volumes:
+      - ./init-primary.sh:/docker-entrypoint-initdb.d/init-primary.sh
+    command: 
+      postgres -c wal_level=replica
+      -c max_wal_senders=10
+      -c hot_standby=on
+  pg-replica:
+    image: postgres:16
+    container_name: lidless-read-db
+    ports: 
+      - "5433:5432"
+    environment: 
+      - POSTGRES_PASSWORD=password
+    depends_on:
+      pg-primary:
+        condition: service_healthy
+    entrypoint: ["/bin/bash", "/replica-setup.sh"]
+    volumes:
+      - ./replica-setup.sh:/replica-setup.sh
+
+      

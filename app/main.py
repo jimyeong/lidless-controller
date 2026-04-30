@@ -3,6 +3,10 @@ from app.physics import calculate_mould_risk
 import os
 
 app = FastAPI()
+# connect CLOUDAMPQ
+
+
+
 
 @app.get("/")
 def read_root():
