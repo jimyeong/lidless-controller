@@ -5,7 +5,7 @@ load_dotenv()
 
 WRITE_DB_CONFIG = {
     "host": os.getenv("WRITE_DB_HOST"),
-    "port": int(os.getenv("WRITE_DB_PORT")),
+    "port": os.getenv("WRITE_DB_PORT"),
     "database": os.getenv("WRITE_DB_NAME"),
     "user": os.getenv("WRITE_DB_USER"),
     "password": os.getenv("WRITE_DB_PASSWORD"),
@@ -13,7 +13,7 @@ WRITE_DB_CONFIG = {
 
 READ_DB_CONFIG = {
     "host": os.getenv("READ_DB_HOST"),
-    "port": int(os.getenv("READ_DB_PORT")),
+    "port": os.getenv("READ_DB_PORT"),
     "database": os.getenv("READ_DB_NAME"),
     "user": os.getenv("READ_DB_USER"),
     "password": os.getenv("READ_DB_PASSWORD"),
