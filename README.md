@@ -5,7 +5,9 @@ Cloud-side microservice for the Lidless home monitoring system. Consumes sensor 
 ## Architecture
 <img width="763" height="542" alt="overview" src="https://github.com/user-attachments/assets/137c6478-ea9b-4182-8968-6dcd23430f3f" />
 
-
+- [OpsCheck](https://github.com/jimyeong/ops-check-service)
+- [Lidless Oracle](https://github.com/jimyeong/lidless-oracle)(React Native Mobile Chatting App)
+- [Lidless Hermes](https://github.com/jimyeong/lidless-hermes)(GraphQL Orchestration Server)
 ## Project Structure
 
 ```
